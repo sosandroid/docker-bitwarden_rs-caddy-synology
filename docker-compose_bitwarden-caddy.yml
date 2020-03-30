@@ -1,0 +1,62 @@
+#---
+#Docker-compose file for Bitwarde_rs proxied by caddy 2.0
+#--- 
+version: "3"
+services: 
+  bitwardenrs: 
+    restart: always
+    # Dani Garcia image https://github.com/dani-garcia/bitwarden_rs
+    image: "bitwardenrs/server:latest"
+    container_name: bitwardenrs
+    environment:
+      # Timezone settings, important for Fail2ban to work
+      - TZ=Europe/Paris
+      # Logging connection attemps
+      - LOG_FILE=/data/bitwarden.log
+      - EXTENDED_LOGGING='true'
+      - LOG_LEVEL=warn
+      # Beef up a bit
+      - ROCKET_WORKERS=20
+      - WEBSOCKET_ENABLED='true'
+      # Hardening a bit
+      - SIGUPS_ALLOWED='false'
+      - DISABLE_ADMIN_TOKEN='true'
+      - SHOW_PASSWORD_HINT='false'
+      - DISABLE_ICON_DOWNLOAD='true'
+    expose:
+      - "80"
+    networks:
+      - bitwarden_net
+    volumes: 
+      - /volume1/docker/bw-data:/data
+      
+  caddy: 
+    restart: always
+    #Official Caddy 2.0 image
+    image: "caddy/caddy:latest"
+    container_name: Caddy_proxy
+    environment:
+      - TZ=Europe/Paris
+      - LOG_FILE=/data/logs/caddy.log
+      # Update this if SSL required according to the use of your own cert or requuest one from Let's Encrypt
+      #- SSLCERTIFICATE=/path/to/ssl/fullcert.pem
+      #- SSLKEY=/path/to/ssl/key.pem
+      #- ACMEE_AGREE='true'
+      #- DOMAIN=bw.yourdomain.com
+      #- EMAIL=mail@mail.com
+    ports: 
+      - 8080:80
+      #- 8443:443
+    networks:
+      - bitwarden_net
+    volumes: 
+      - ./caddy-data/config/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy-data/data:/data
+      - ./caddy-data/sites:/var/www/html
+      - Certfiles:/root/.caddy
+
+volumes:
+  Certfiles:
+
+networks:
+  bitwarden_net:
