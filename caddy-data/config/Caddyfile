@@ -1,0 +1,72 @@
+# Caddyfile V2.0 config file
+:80 {
+  #Caddy on port 80 in container to bitwarden_rs private instance
+  #Use it if Caddy behind another reverse proxy such as the one embedded on Synology
+  log {
+	output file {env.LOG_FILE}
+	level INFO
+	#roll_size 5MiB #Not working on Caddy V2.0.0 Beta20 https://caddyserver.com/docs/caddyfile/directives/log#log
+	#roll_keep 5 #Not working on Caddy V2.0.0 Beta20 https://caddyserver.com/docs/caddyfile/directives/log#log
+  }
+  encode zstd gzip
+
+  header / {
+       # Enable cross-site filter (XSS) and tell browser to block detected attacks
+       X-XSS-Protection "1; mode=block"
+       # Disallow the site to be rendered within a frame (clickjacking protection)
+       X-Frame-Options "DENY"
+       # Prevent search engines from indexing (optional)
+       X-Robots-Tag "none"
+	   # Server name remove
+	   -Server
+   }
+
+  # The negotiation endpoint is also proxied to Rocket
+  reverse_proxy /notifications/hub/negotiate bitwardenrs:80
+
+  # Notifications redirected to the websockets server
+  reverse_proxy /notifications/hub bitwardenrs:3012
+
+  # Proxy the Root directory to Rocket
+  reverse_proxy bitwardenrs:80
+}
+
+#{env.DOMAIN}:443 {
+#  #Caddy on port 443 in container to bitwarden_rs private instance 
+#  #Use it if Caddy exposed to the net 
+#  #Doc about automatic HTTPS https://caddyserver.com/docs/automatic-https
+#
+#  log {
+#	output file {env.LOG_FILE}
+#	level INFO
+#   #roll_size 5MiB #Not working on Caddy V2.0.0 Beta20 https://caddyserver.com/docs/caddyfile/directives/log#log
+#   #rool_keep 5 #Not working on Caddy V2.0.0 Beta20 https://caddyserver.com/docs/caddyfile/directives/log#log
+#  }
+#
+#  # Uncomment only one of the 2 lines. Depending if you provide your own cert or request one from Let's Encrypt
+#  tls {env.SSLCERTIFICATE} {env.SSLKEY}
+#  tls {env.EMAIL}
+#
+#  encode zstd gzip
+#
+#  header / {
+#       # Enable HTTP Strict Transport Security (HSTS)
+#       Strict-Transport-Security "max-age=31536000;"
+#       # Enable cross-site filter (XSS) and tell browser to block detected attacks
+#       X-XSS-Protection "1; mode=block"
+#       # Disallow the site to be rendered within a frame (clickjacking protection)
+#       X-Frame-Options "DENY"
+#       # Prevent search engines from indexing (optional)
+#       X-Robots-Tag "none"
+#       # Server name remove
+#       -Server
+#   }
+#  # The negotiation endpoint is also proxied to Rocket
+#  reverse_proxy /notifications/hub/negotiate bitwardenrs:80
+#
+#  # Notifications redirected to the websockets server
+#  reverse_proxy /notifications/hub bitwardenrs:3012
+#
+#  # Proxy the Root directory to Rocket
+#  reverse_proxy bitwardenrs:80
+#}
