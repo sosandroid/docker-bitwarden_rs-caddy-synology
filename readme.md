@@ -15,7 +15,7 @@ Despite this has been made to run on Synology NAS, this should run on other syst
     + [Startup](#startup)
     + [Maintenance](#maintenance)
   * [Hardening](#hardening)
-  * [Todo](#todo)
+  * [To do](#to-do)
   * [Collaboration](#collaboration)
 
 ## Documentation
