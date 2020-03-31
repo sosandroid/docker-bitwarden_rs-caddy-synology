@@ -15,6 +15,7 @@ Despite this has been made to run on Synology NAS, this should run on other syst
     + [Startup](#startup)
     + [Maintenance](#maintenance)
   * [Hardening](#hardening)
+  * [Todo](#todo)
   * [Collaboration](#collaboration)
 
 ## Documentation
@@ -99,6 +100,10 @@ In order to keep a clean system, from time to time, use [this tutoriel](https://
 ## Hardening
 
 Your Bitwarden_RS instance is now up and running. It is not yet hardened to brute-force attacks. Please, install Fail2ban to avoid loosing your account control. Here a way to run [Fail2Ban](https://github.com/sosandroid/docker-fail2ban-synology) in Docker on Synology NAS
+
+## To do
+
+Modifying `Caddyfile` to filter ip addresses allowed to access `/admin`. Does not work yet on Caddy V2.0 beta20. `ipfilter` directive not supported
 
 ## Collaboration
 Feel free to propose any optimization through pull requests
