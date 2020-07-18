@@ -20,9 +20,16 @@ services:
       - WEBSOCKET_ENABLED='true'
       # Hardening a bit
       - SIGUPS_ALLOWED='false'
-      - DISABLE_ADMIN_TOKEN='true'
+      #- DISABLE_ADMIN_TOKEN='true'
+      #- ADMIN_TOKEN=YouRandomTokenHere
       - SHOW_PASSWORD_HINT='false'
       - DISABLE_ICON_DOWNLOAD='true'
+      #- SMTP_HOST=smtphost
+      #- SMTP_PORT=port
+      #- SMTP_SSL='true'
+      #- SMTP_FROM=address_from@domain.tld
+      #- SMTP_USERNAME=smtp_user_name
+      #- SMTP_PASSWORD=smtp_password
     expose:
       - "80"
     networks:
@@ -33,7 +40,7 @@ services:
   caddy: 
     restart: always
     #Official Caddy 2.0 image
-    image: "caddy/caddy:latest"
+    image: "caddy:latest"
     container_name: Caddy_proxy
     environment:
       - TZ=Europe/Paris
@@ -42,7 +49,7 @@ services:
       #- SSLCERTIFICATE=/path/to/ssl/fullcert.pem
       #- SSLKEY=/path/to/ssl/key.pem
       #- ACMEE_AGREE='true'
-      #- DOMAIN=bw.yourdomain.com
+      #- DOMAIN=cad.example.org
       #- EMAIL=mail@mail.com
     ports: 
       - 8080:80
