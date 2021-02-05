@@ -57,7 +57,8 @@ You will first need to access the admin page to fine tune the Bitwarden_RS serve
 		- destination host: `localhost`
 		- port : `8080`
 		- In _Custom Headers_ tab, click the drop down list next to _add_ button and choose `websockets`
-	3. Add a new entry for HTTP - Make sure webstation is running with a dummy page to be served. This is only as fallback.
+	3. Add a new entry for `HTTP` 
+		- Make sure webstation is running with a dummy page to be served. This is only as fallback.
 		- Name : Bitwarden entry point HTTP
 		- Source protocol : `HTTP`
 		- source domain : `bw.yourdomain.com`
@@ -69,7 +70,7 @@ You will first need to access the admin page to fine tune the Bitwarden_RS serve
 	1. Connect your admin account with password
 	2. Gain root using `sudo -i` with your admin password
 	3. `cd /volumeX/docker/`
-	4. `docker-compose -f docker-compose_bitwarden-caddy.yml pull` to load needed images
+	4. Pull needed images `docker-compose -f docker-compose_bitwarden-caddy.yml pull`
 	5. Ready for a first run : `docker-compose -f docker-compose_bitwarden-caddy.yml up`
 
 If everything goes well, the prompt will let you know the containers are started and wait until a `ctrl + C` is triggered to stop them. Test the accesses and start the Birwarden_RS fine tune at `https://bw.yourdomain.com/admin`. Once finished disable the access to admin panel from itself. 
@@ -81,12 +82,12 @@ Shutdown the servers issuing a `ctrl + C` in the terminal
 ## Startup and Maintenance
 
 ### Startup
-Once setup is finished, you're ready to launche your "_prouction_" server. Review all the settings and  environment varaibles in the `.yml` file. Test it using the same `docker-compose -f docker-compose_bitwarden-caddy.yml up` as previously. If anything goes well, stop them and run as `detached` with the following command.
+Once setup is finished, you're ready to launche your "_production_" server. Review all the settings and  environment varaibles in the `.yml` file. Test it using the same `docker-compose -f docker-compose_bitwarden-caddy.yml up` as previously. If anything goes well, stop them and run as `detached` with the following command.
 
 	`docker-compose -f docker-compose_bitwarden-caddy.yml up -d`
 
 ### Maintenance
-Upgrade on a regular basis the servers as they continue to evolve on a daily/weekly basis. Run from a terminal the following commands from as `root` from time to time.
+Upgrade on a regular basis the servers as packages continue to evolve on a daily/weekly basis. From time to time, Run from a terminal the following commands as `root`.
 
 ````sh
 cd /volumeX/docker/
