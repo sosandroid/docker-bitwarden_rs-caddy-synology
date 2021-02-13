@@ -19,7 +19,7 @@ services:
       - ROCKET_WORKERS=20
       - WEBSOCKET_ENABLED='true'
       # Hardening a bit
-      - SIGUPS_ALLOWED='false'
+      - SIGNUPS_ALLOWED='false'
       #- DISABLE_ADMIN_TOKEN='true'
       #- ADMIN_TOKEN=YouRandomTokenHere
       - SHOW_PASSWORD_HINT='false'
