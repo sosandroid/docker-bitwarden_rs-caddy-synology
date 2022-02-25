@@ -1,8 +1,8 @@
-# Docker Bitwarden_RS proxified for Synology NAS
+# Docker Vaultwarden proxified for Synology NAS
 
-A docker-compose ready package to run [Bitwarden_RS](https://github.com/dani-garcia/bitwarden_rs) proxified with [Caddy server](https://github.com/caddyserver/caddy-docker). This setup provides a Bitwarden_RS server with support of websocket notifications.
+A docker-compose ready package to run [Vaultwarden](https://github.com/dani-garcia/vaultwarden) proxified with [Caddy server](https://github.com/caddyserver/caddy-docker). This setup provides a Vaultwarden server with support of websocket notifications.
  
-The goal is to keep the Synology NAS system untouched to be upgrade-proof. This is the reason why caddy server is used to enable the websocket notifications. Synology do not allow advanced setting of their Nginx reverse proxy and ports 80/443 are not free. We will use the embedded reverse proxy and forward the request on some other ports. This is the reason why Bitwarden_rs server is not set to use SSL because behind 2 proxies.
+The goal is to keep the Synology NAS system untouched to be upgrade-proof. This is the reason why caddy server is used to enable the websocket notifications. Synology do not allow advanced setting of their Nginx reverse proxy and ports 80/443 are not free. We will use the embedded reverse proxy and forward the request on some other ports. This is the reason why Vaultwarden server is not set to use SSL because behind 2 proxies.
 
 Despite this has been made to run on Synology NAS, this should run on other systems with / without minor adaptations.
 
@@ -20,7 +20,7 @@ Despite this has been made to run on Synology NAS, this should run on other syst
 
 ## Documentation
 
-- [Bitwarden_RS wiki](https://github.com/dani-garcia/bitwarden_rs/wiki)
+- [Vaultwarden wiki](https://github.com/dani-garcia/vaultwarden/wiki)
 - [Caddy server 2.0 docs](https://caddyserver.com/docs/)
 
 ## Pre-requisite
@@ -43,7 +43,7 @@ As convention, we will use as example the following
 
 ## Setup
 
-You will first need to access the admin page to fine tune the Bitwarden_RS server. Beware, if accessed once, it will be enabled in `/data/config.json` whatever are the Environment variables. You'll need to disable the admin panel from itself.
+You will first need to access the admin page to fine tune the Vaultwarden server. Beware, if accessed once, it will be enabled in `/data/config.json` whatever are the Environment variables. You'll need to disable the admin panel from itself.
 
 1. On Synology's DSM GUI
 	1. Go to `Settings` > `Application Portal` > `Reverse proxy`
@@ -100,7 +100,7 @@ In order to keep a clean system, from time to time, use [this tutoriel](https://
 
 ## Hardening
 
-Your Bitwarden_RS instance is now up and running. It is not yet hardened to brute-force attacks. Please, install Fail2ban to avoid loosing your account control. Here a way to run [Fail2Ban](https://github.com/sosandroid/docker-fail2ban-synology) in Docker on Synology NAS
+Your Vaultwarden instance is now up and running. It is not yet hardened to brute-force attacks. Please, install Fail2ban to avoid loosing your account control. Here a way to run [Fail2Ban](https://github.com/sosandroid/docker-fail2ban-synology) in Docker on Synology NAS
 
 ## To do
 
