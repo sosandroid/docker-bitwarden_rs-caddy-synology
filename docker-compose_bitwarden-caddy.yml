@@ -1,13 +1,13 @@
 #---
-#Docker-compose file for Bitwarde_rs proxied by caddy 2.0
+#Docker-compose file for Vaultwarden proxied by caddy 2.0
 #--- 
 version: "3"
 services: 
-  bitwardenrs: 
+  vaultwarden: 
     restart: always
     # Dani Garcia image https://github.com/dani-garcia/bitwarden_rs
-    image: "bitwardenrs/server:latest"
-    container_name: bitwardenrs
+    image: "vaultwarden/server:latest"
+    container_name: vaultwarden
     environment:
       # Timezone settings, important for Fail2ban to work
       - TZ=Europe/Paris
