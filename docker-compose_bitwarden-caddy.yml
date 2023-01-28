@@ -7,10 +7,10 @@ services:
     restart: always
     # Dani Garcia image https://github.com/dani-garcia/bitwarden_rs
     image: "vaultwarden/server:latest"
-    container_name: vaultwarden
+    container_name: vaultwarden_12823
     environment:
       # Timezone settings, important for Fail2ban to work
-      - TZ=Europe/Paris
+      - TZ=America/Los_Angeles
       # Logging connection attemps
       - LOG_FILE=/data/bitwarden.log
       - EXTENDED_LOGGING='true'
@@ -19,9 +19,9 @@ services:
       - ROCKET_WORKERS=20
       - WEBSOCKET_ENABLED='true'
       # Hardening a bit
-      - SIGNUPS_ALLOWED='false'
+      - SIGNUPS_ALLOWED='true'
       #- DISABLE_ADMIN_TOKEN='true'
-      #- ADMIN_TOKEN=YouRandomTokenHere
+      - ADMIN_TOKEN=4k5555kljlknvadvarfg0889a0000
       - SHOW_PASSWORD_HINT='false'
       - DISABLE_ICON_DOWNLOAD='true'
       #- SMTP_HOST=smtphost
@@ -53,7 +53,7 @@ services:
       #- EMAIL=mail@mail.com
     ports: 
       - 8080:80
-      #- 8443:443
+      - 8443:443
     networks:
       - bitwarden_net
     volumes: 
