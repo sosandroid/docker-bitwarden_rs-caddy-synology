@@ -11,7 +11,7 @@ services:
     environment:
       # Timezone settings, important for Fail2ban to work
       - TZ=America/Los_Angeles
-      # Logging connection attemps
+      # Logging connection attempts
       - LOG_FILE=/data/bitwarden.log
       - EXTENDED_LOGGING='true'
       - LOG_LEVEL=warn
@@ -43,14 +43,14 @@ services:
     image: "caddy:latest"
     container_name: Caddy_proxy
     environment:
-      - TZ=Europe/Paris
+      - TZ=America/Los_Angeles
       - LOG_FILE=/data/logs/caddy.log
       # Update this if SSL required according to the use of your own cert or requuest one from Let's Encrypt
       #- SSLCERTIFICATE=/path/to/ssl/fullcert.pem
       #- SSLKEY=/path/to/ssl/key.pem
       #- ACMEE_AGREE='true'
-      #- DOMAIN=cad.example.org
-      #- EMAIL=mail@mail.com
+      - DOMAIN=vault.westerly.cloud
+      - EMAIL=sudocode4@gmail.com
     ports: 
       - 8080:80
       - 8443:443
