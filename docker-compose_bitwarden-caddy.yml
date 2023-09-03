@@ -48,7 +48,7 @@ services:
       # Update this if SSL required according to the use of your own cert or requuest one from Let's Encrypt
       #- SSLCERTIFICATE=/path/to/ssl/fullcert.pem
       #- SSLKEY=/path/to/ssl/key.pem
-      #- ACMEE_AGREE='true'
+      #- ACME_AGREE='true'
       #- DOMAIN=cad.example.org
       #- EMAIL=mail@mail.com
     ports: 
